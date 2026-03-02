@@ -15,6 +15,12 @@ This project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - **Layout**: `.table-page .table-scroll` now gets flex fill alongside `.audit-table-scroll`, so table pages can use either scroll wrapper class.
 
 ### Added
+- **Toggle**: Hover state now changes border to `--toggle-border-hover` (neutral-600 light / neutral-500 dark). Disabled state (`.disabled`, `aria-disabled="true"`) and skeleton state (`.skeleton`) added with muted fill/border/thumb tokens. Dark mode auto-adapts via new `--toggle-active`, `--toggle-inactive`, and related tokens in `[data-theme="dark"]`. `.toggle-row` / `.toggle-label` documented in the Forms demo. Toggle Switch also added to the Toggles & Expand section.
+- **Radio**: Added hover (`.radio-option:hover`), disabled (`.radio-option.disabled`), and skeleton (`.radio-option.skeleton`) states. Fixed dark mode border — was using `--border-200` (neutral-800), now correctly inherits from `--toggle-inactive` (neutral-700 dark). Forced-colors support added for disabled/skeleton. Forms demo updated to show all states.
+- **Tokens**: Added `--toggle-border-hover`, `--toggle-fill-disabled`, `--toggle-border-disabled`, `--toggle-thumb-disabled` to `:root`; added full dark mode overrides for all toggle tokens.
+
+### Fixed
+- **Priority Toggle**: `priority-toggle-btn` height corrected from 30px to 32px to match system button standard.
 - GitHub issue templates (bug report, component request, accessibility issue)
 - Pull request template with review checklist
 - CODEOWNERS file

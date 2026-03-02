@@ -417,7 +417,9 @@ select:focus { border-color: var(--primary); outline: none; }
   display: flex; align-items: center; justify-content: center;
   transition: border-color 0.15s;
 }
+.radio-option:hover .radio-circle { border-color: var(--toggle-border-hover); }
 .radio-option.selected .radio-circle { border-color: var(--primary); }
+.radio-option.selected:hover .radio-circle { border-color: var(--primary); }
 .radio-option.selected .radio-circle::after {
   content: '';
   width: 8px; height: 8px;
@@ -427,7 +429,27 @@ select:focus { border-color: var(--primary); outline: none; }
 .radio-label { font-size: 14px; color: var(--text-strong); }
 .radio-inline { display: flex; align-items: center; gap: 16px; }
 
-[data-theme="dark"] .radio-circle { border-color: var(--border-200); }
+/* Disabled state */
+.radio-option.disabled,
+.radio-option[aria-disabled="true"] {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.radio-option.disabled .radio-circle,
+.radio-option[aria-disabled="true"] .radio-circle { border-color: var(--toggle-border-disabled); }
+.radio-option.disabled.selected .radio-circle::after,
+.radio-option[aria-disabled="true"].selected .radio-circle::after { background: var(--toggle-border-disabled); }
+.radio-option.disabled .radio-label,
+.radio-option[aria-disabled="true"] .radio-label { color: var(--text-muted); }
+
+/* Skeleton state */
+.radio-option.skeleton {
+  cursor: default;
+  pointer-events: none;
+}
+.radio-option.skeleton .radio-circle { border-color: var(--toggle-border-disabled); }
+.radio-option.skeleton.selected .radio-circle::after { background: var(--toggle-border-disabled); }
+.radio-option.skeleton .radio-label { color: var(--text-muted); }
 
 /* --- Toggle Switch --- */
 .toggle-row { display: flex; align-items: center; gap: 12px; }
@@ -441,10 +463,12 @@ select:focus { border-color: var(--primary); outline: none; }
   border: 1px solid var(--toggle-inactive);
   transition: background 0.15s, border-color 0.15s;
 }
+.toggle-switch:hover { border-color: var(--toggle-border-hover); }
 .toggle-switch.active {
   background: var(--toggle-active);
   border-color: var(--toggle-active);
 }
+.toggle-switch.active:hover { border-color: var(--toggle-border-hover); }
 .toggle-thumb {
   width: 12px; height: 12px;
   border-radius: 50%;
@@ -456,6 +480,26 @@ select:focus { border-color: var(--primary); outline: none; }
 }
 .toggle-switch.active .toggle-thumb { left: 13px; }
 .toggle-label { font-size: 14px; color: var(--text-strong); }
+
+/* Disabled state */
+.toggle-switch.disabled,
+.toggle-switch[aria-disabled="true"] {
+  background: var(--toggle-fill-disabled);
+  border-color: var(--toggle-border-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.toggle-switch.disabled .toggle-thumb,
+.toggle-switch[aria-disabled="true"] .toggle-thumb { background: var(--toggle-thumb-disabled); }
+
+/* Skeleton state */
+.toggle-switch.skeleton {
+  background: var(--toggle-fill-disabled);
+  border-color: var(--toggle-border-disabled);
+  cursor: default;
+  pointer-events: none;
+}
+.toggle-switch.skeleton .toggle-thumb { background: var(--toggle-thumb-disabled); }
 
 /* --- Input Field --- */
 .input-field {
@@ -1335,7 +1379,7 @@ td:has(+ .col-action) { padding-right: 20px !important; }
 /* --- Segmented Toggle --- */
 .priority-toggle { display: inline-flex; border: 1px solid var(--border-200); border-radius: var(--radius); overflow: hidden; }
 .priority-toggle-btn {
-  padding: 0 16px; height: 30px; border: none; background: var(--surface-card);
+  padding: 0 16px; height: 32px; border: none; background: var(--surface-card);
   font-family: var(--font); font-size: 14px; color: var(--text-subtle); cursor: pointer;
   border-right: 1px solid var(--border-200);
 }
@@ -2085,6 +2129,13 @@ td:has(+ .col-action) { padding-right: 20px !important; }
   .toggle-thumb {
     background: ButtonText;
   }
+  .toggle-switch.disabled,
+  .toggle-switch.skeleton {
+    border-color: GrayText;
+    background: ButtonFace;
+  }
+  .toggle-switch.disabled .toggle-thumb,
+  .toggle-switch.skeleton .toggle-thumb { background: GrayText; }
   .radio-circle {
     border-color: ButtonText;
   }
@@ -2094,6 +2145,10 @@ td:has(+ .col-action) { padding-right: 20px !important; }
   .radio-option.selected .radio-circle::after {
     background: Highlight;
   }
+  .radio-option.disabled .radio-circle,
+  .radio-option.skeleton .radio-circle { border-color: GrayText; }
+  .radio-option.disabled.selected .radio-circle::after,
+  .radio-option.skeleton.selected .radio-circle::after { background: GrayText; }
   .input-field {
     border-color: ButtonText;
   }

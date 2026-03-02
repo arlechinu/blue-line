@@ -824,15 +824,57 @@ html { scroll-behavior: smooth; }
         <button data-tab="code" onclick="switchTab(this,'block-forms-toggle')">Code</button>
       </div>
       <div class="ds-preview">
-        <div class="ds-preview-row">
-          <div class="toggle-switch active" onclick="this.classList.toggle('active')"><div class="toggle-thumb"></div></div>
-          <div class="toggle-switch" onclick="this.classList.toggle('active')"><div class="toggle-thumb"></div></div>
+        <div class="ds-preview-row" style="gap:16px; flex-wrap:wrap; align-items:center;">
+          <div class="toggle-row">
+            <div class="toggle-switch" onclick="this.classList.toggle('active')"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">Off</span>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-switch active" onclick="this.classList.toggle('active')"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">On</span>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-switch disabled"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label" style="color:var(--text-muted)">Disabled off</span>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-switch active disabled"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label" style="color:var(--text-muted)">Disabled on</span>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-switch skeleton"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label" style="color:var(--text-muted)">Skeleton</span>
+          </div>
         </div>
       </div>
       <div class="ds-code" style="display:none">
         <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-        <pre><code class="language-html">&lt;div class="toggle-switch active" onclick="this.classList.toggle('active')"&gt;
+        <pre><code class="language-html">&lt;!-- Off --&gt;
+&lt;div class="toggle-switch" onclick="this.classList.toggle('active')"&gt;
   &lt;div class="toggle-thumb"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- On --&gt;
+&lt;div class="toggle-switch active" onclick="this.classList.toggle('active')"&gt;
+  &lt;div class="toggle-thumb"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;div class="toggle-switch disabled" aria-disabled="true"&gt;
+  &lt;div class="toggle-thumb"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Skeleton (loading) --&gt;
+&lt;div class="toggle-switch skeleton"&gt;
+  &lt;div class="toggle-thumb"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- With label --&gt;
+&lt;div class="toggle-row"&gt;
+  &lt;div class="toggle-switch active" onclick="this.classList.toggle('active')"&gt;
+    &lt;div class="toggle-thumb"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;span class="toggle-label"&gt;Enable feature&lt;/span&gt;
 &lt;/div&gt;</code></pre>
       </div>
     </div>
@@ -846,9 +888,25 @@ html { scroll-behavior: smooth; }
         <button data-tab="code" onclick="switchTab(this,'block-forms-radio')">Code</button>
       </div>
       <div class="ds-preview">
-        <div class="radio-group">
-          <label class="radio-option"><span class="radio-circle"></span><span class="radio-label">Option A</span></label>
-          <label class="radio-option selected"><span class="radio-circle" style="border-color:var(--primary);"></span><span class="radio-label">Option B</span></label>
+        <div style="display:flex; gap:32px; flex-wrap:wrap; align-items:flex-start;">
+          <div>
+            <div class="radio-group">
+              <label class="radio-option"><span class="radio-circle"></span><span class="radio-label">Default off</span></label>
+              <label class="radio-option selected"><span class="radio-circle"></span><span class="radio-label">Default on</span></label>
+            </div>
+          </div>
+          <div>
+            <div class="radio-group">
+              <label class="radio-option disabled"><span class="radio-circle"></span><span class="radio-label">Disabled off</span></label>
+              <label class="radio-option selected disabled"><span class="radio-circle"></span><span class="radio-label">Disabled on</span></label>
+            </div>
+          </div>
+          <div>
+            <div class="radio-group">
+              <label class="radio-option skeleton"><span class="radio-circle"></span><span class="radio-label">Skeleton off</span></label>
+              <label class="radio-option selected skeleton"><span class="radio-circle"></span><span class="radio-label">Skeleton on</span></label>
+            </div>
+          </div>
         </div>
       </div>
       <div class="ds-code" style="display:none">
@@ -861,6 +919,10 @@ html { scroll-behavior: smooth; }
   &lt;label class="radio-option selected"&gt;
     &lt;span class="radio-circle"&gt;&lt;/span&gt;
     &lt;span class="radio-label"&gt;Option B&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;label class="radio-option disabled" aria-disabled="true"&gt;
+    &lt;span class="radio-circle"&gt;&lt;/span&gt;
+    &lt;span class="radio-label"&gt;Disabled&lt;/span&gt;
   &lt;/label&gt;
 &lt;/div&gt;</code></pre>
       </div>
@@ -915,10 +977,18 @@ html { scroll-behavior: smooth; }
     <tbody>
       <tr><td><code>.input-field</code></td><td>Wrapper for text inputs with border and focus ring</td></tr>
       <tr><td><code>.select-field</code></td><td>Styled native select with custom arrow</td></tr>
-      <tr><td><code>.toggle-switch</code></td><td>Toggle container; add .active for on state</td></tr>
+      <tr><td><code>.toggle-switch</code></td><td>Toggle pill container; add .active for on state</td></tr>
       <tr><td><code>.toggle-thumb</code></td><td>The sliding circle inside the toggle</td></tr>
+      <tr><td><code>.toggle-switch.disabled</code></td><td>Disabled (non-interactive) state; also accepts aria-disabled="true"</td></tr>
+      <tr><td><code>.toggle-switch.skeleton</code></td><td>Loading skeleton state</td></tr>
+      <tr><td><code>.toggle-row</code></td><td>Flex row pairing a toggle with a label (gap: 12px)</td></tr>
+      <tr><td><code>.toggle-label</code></td><td>Text label beside a toggle</td></tr>
       <tr><td><code>.radio-group</code></td><td>Vertical radio option container</td></tr>
       <tr><td><code>.radio-option</code></td><td>Single radio item with circle + label</td></tr>
+      <tr><td><code>.radio-option.selected</code></td><td>Selected/checked state</td></tr>
+      <tr><td><code>.radio-option.disabled</code></td><td>Disabled (non-interactive) state; also accepts aria-disabled="true"</td></tr>
+      <tr><td><code>.radio-option.skeleton</code></td><td>Loading skeleton state</td></tr>
+      <tr><td><code>.radio-inline</code></td><td>Horizontal radio group layout</td></tr>
       <tr><td><code>.file-upload-field</code></td><td>File browser trigger area</td></tr>
       <tr><td><code>.form-row</code></td><td>Horizontal label + field layout</td></tr>
       <tr><td><code>.form-label</code></td><td>Fixed-width label (266px) for form rows</td></tr>
@@ -2374,7 +2444,66 @@ html { scroll-behavior: smooth; }
      ============================================================ -->
 <section id="toggles" class="ds-section">
   <h2 class="ds-section-title">Toggles &amp; Expand</h2>
-  <p class="ds-section-desc">Segmented toggle buttons for view switching and expand/collapse chevron buttons.</p>
+  <p class="ds-section-desc">Toggle switches, segmented toggle buttons for view switching, and expand/collapse chevron buttons.</p>
+
+  <div class="ds-subsection">
+    <p class="ds-label">Toggle Switch</p>
+    <div class="ds-component-block" id="block-toggles-switch">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-toggles-switch')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-toggles-switch')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="ds-preview-row" style="gap:16px; flex-wrap:wrap; align-items:center;">
+          <div class="toggle-row">
+            <div class="toggle-switch" onclick="this.classList.toggle('active')"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">Off</span>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-switch active" onclick="this.classList.toggle('active')"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">On</span>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-switch disabled"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label" style="color:var(--text-muted)">Disabled</span>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-switch active disabled"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label" style="color:var(--text-muted)">Disabled on</span>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-switch skeleton"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label" style="color:var(--text-muted)">Skeleton</span>
+          </div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;!-- Off --&gt;
+&lt;div class="toggle-switch" onclick="this.classList.toggle('active')"&gt;
+  &lt;div class="toggle-thumb"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- On --&gt;
+&lt;div class="toggle-switch active" onclick="this.classList.toggle('active')"&gt;
+  &lt;div class="toggle-thumb"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Disabled --&gt;
+&lt;div class="toggle-switch disabled" aria-disabled="true"&gt;
+  &lt;div class="toggle-thumb"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- With label --&gt;
+&lt;div class="toggle-row"&gt;
+  &lt;div class="toggle-switch active" onclick="this.classList.toggle('active')"&gt;
+    &lt;div class="toggle-thumb"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;span class="toggle-label"&gt;Enable feature&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+  </div>
 
   <div class="ds-subsection">
     <p class="ds-label">Priority Toggle</p>

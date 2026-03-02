@@ -219,6 +219,10 @@
   --primary-hover: var(--blue-800);
   --toggle-active: var(--blue-700);
   --toggle-inactive: var(--neutral-400);
+  --toggle-border-hover: var(--neutral-600);
+  --toggle-fill-disabled: var(--neutral-200);
+  --toggle-border-disabled: var(--neutral-300);
+  --toggle-thumb-disabled: var(--neutral-500);
   --tab-bg: var(--neutral-200);
   --tab-active-bg: #1a2138;
   --tab-text: var(--neutral-800);
@@ -321,6 +325,14 @@ body {
   --shadow-2: 0 2px 4px rgba(0,0,0,0.20);
   --shadow-3: 0 4px 8px rgba(0,0,0,0.24);
   --shadow-4: 0 8px 16px rgba(0,0,0,0.32);
+
+  /* Toggle — dark */
+  --toggle-active: var(--blue-400);
+  --toggle-inactive: var(--neutral-700);
+  --toggle-border-hover: var(--neutral-500);
+  --toggle-fill-disabled: var(--neutral-900);
+  --toggle-border-disabled: var(--neutral-800);
+  --toggle-thumb-disabled: var(--neutral-800);
 
   /* Semantic tag/badge tokens — dark */
   --ds-neutral-100: var(--neutral-1000);  --ds-neutral-text: #ffffff;              --ds-neutral-700: var(--neutral-600);
