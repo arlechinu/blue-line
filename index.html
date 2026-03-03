@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="components.css">
   <link rel="stylesheet" href="icons.css">
   <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
   <style>
 body { font-family: var(--font); background: var(--surface-bg); color: var(--text-strong); }
 
@@ -204,6 +205,7 @@ html { scroll-behavior: smooth; }
     <a class="ds-sidebar-link" href="#tags">Tags</a>
     <a class="ds-sidebar-link" href="#badges">Badges</a>
     <a class="ds-sidebar-link" href="#chips">Chips</a>
+    <a class="ds-sidebar-link" href="#scan-status">Scan Status</a>
     <a class="ds-sidebar-link" href="#verdicts">Verdicts</a>
     <a class="ds-sidebar-link" href="#severities">Severities</a>
     <a class="ds-sidebar-link" href="#level-badges">Level Badges</a>
@@ -513,7 +515,7 @@ html { scroll-behavior: smooth; }
      ============================================================ -->
 <section id="icons" class="ds-section">
   <h2 class="ds-section-title">Icons</h2>
-  <p class="ds-section-desc">15 SVG icons rendered as CSS mask-images. Icons inherit color from the parent element via <code style="font-family:'SF Mono',Consolas,monospace; font-size:12.5px; background:var(--blue-100); color:var(--blue-900); padding:1px 6px; border-radius:3px;">currentColor</code>.</p>
+  <p class="ds-section-desc">15 monochrome SVG icons (CSS mask-image, inherit <code style="font-family:'SF Mono',Consolas,monospace; font-size:12.5px; background:var(--blue-100); color:var(--blue-900); padding:1px 6px; border-radius:3px;">currentColor</code>) + 5 multi-colored signal icons (CSS background-image).</p>
 
   <div class="ds-subsection">
     <p class="ds-label">Icon Library</p>
@@ -533,6 +535,18 @@ html { scroll-behavior: smooth; }
       <div class="ds-icon-cell"><span class="icon icon-control-v icon-lg"></span><span>icon-control-v</span></div>
       <div class="ds-icon-cell"><span class="icon icon-close icon-lg"></span><span>icon-close</span></div>
       <div class="ds-icon-cell"><span class="icon icon-drag-v icon-lg"></span><span>icon-drag-v</span></div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <p class="ds-label">Signal Icons</p>
+    <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Multi-colored severity/risk signal icons. Fixed colors — not affected by <code style="font-family:'SF Mono',Consolas,monospace; font-size:12.5px; background:var(--blue-100); color:var(--blue-900); padding:1px 6px; border-radius:3px;">currentColor</code>.</p>
+    <div class="ds-icon-grid">
+      <div class="ds-icon-cell"><span class="icon-signal-0" style="width:20px;height:20px;background-size:20px 20px;"></span><span>icon-signal-0</span></div>
+      <div class="ds-icon-cell"><span class="icon-signal-1" style="width:20px;height:20px;background-size:20px 20px;"></span><span>icon-signal-1</span></div>
+      <div class="ds-icon-cell"><span class="icon-signal-2" style="width:20px;height:20px;background-size:20px 20px;"></span><span>icon-signal-2</span></div>
+      <div class="ds-icon-cell"><span class="icon-signal-3" style="width:20px;height:20px;background-size:20px 20px;"></span><span>icon-signal-3</span></div>
+      <div class="ds-icon-cell"><span class="icon-signal-4" style="width:20px;height:20px;background-size:20px 20px;"></span><span>icon-signal-4</span></div>
     </div>
   </div>
 
@@ -1101,6 +1115,118 @@ html { scroll-behavior: smooth; }
       </div>
     </div>
   </div>
+
+  <div class="ds-subsection">
+    <p class="ds-label">Tag Group</p>
+    <div class="ds-component-block" id="block-tags-group">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-tags-group')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-tags-group')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div style="display:flex; flex-direction:column; gap:20px">
+          <div style="display:flex; flex-direction:column; gap:8px">
+            <span style="font-size:12px; color:var(--text-muted-accessible)">Status tags</span>
+            <div class="tag-group">
+              <span class="scan-status scan-status-allowed">Allowed</span>
+              <span class="scan-status scan-status-blocked">Blocked</span>
+              <span class="scan-status scan-status-complete">Complete</span>
+              <span class="scan-status scan-status-failed">Failed</span>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px">
+            <span style="font-size:12px; color:var(--text-muted-accessible)">Keyword tags — truncated with overflow badge</span>
+            <div class="tag-group">
+              <span class="tag-keyword">Keyword</span>
+              <span class="tag-keyword">Keyword</span>
+              <span class="tag-keyword">Keyword</span>
+              <span class="badge-number badge-number-neutral">+2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;!-- Status tag group --&gt;
+&lt;div class="tag-group"&gt;
+  &lt;span class="scan-status scan-status-allowed"&gt;Allowed&lt;/span&gt;
+  &lt;span class="scan-status scan-status-blocked"&gt;Blocked&lt;/span&gt;
+  &lt;span class="scan-status scan-status-complete"&gt;Complete&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Keyword group with overflow --&gt;
+&lt;div class="tag-group"&gt;
+  &lt;span class="tag-keyword"&gt;Keyword&lt;/span&gt;
+  &lt;span class="tag-keyword"&gt;Keyword&lt;/span&gt;
+  &lt;span class="tag-keyword"&gt;Keyword&lt;/span&gt;
+  &lt;span class="badge-number badge-number-neutral"&gt;+2&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <p class="ds-label">Tag Variables</p>
+    <div class="ds-component-block" id="block-tag-variables">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-tag-variables')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-tag-variables')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <span style="font-size:12px; color:var(--text-muted-accessible)">Status tags (filled)</span>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+            <span class="tag tag-neutral">Neutral</span>
+            <span class="tag tag-inactive">Inactive</span>
+            <span class="tag tag-secure">Secure</span>
+            <span class="tag tag-success">Success</span>
+            <span class="tag tag-accent">Accent</span>
+            <span class="tag tag-guide">Guide</span>
+            <span class="tag tag-alert">Alert</span>
+            <span class="tag tag-warn">Warn</span>
+            <span class="tag tag-caution">Caution</span>
+          </div>
+
+          <span style="font-size:12px; color:var(--text-muted-accessible)">Keyword tags (colored text)</span>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+            <span class="tag tag-keyword">Default</span>
+            <span class="tag tag-keyword tag-keyword-inactive">Inactive</span>
+            <span class="tag tag-keyword tag-keyword-secure">Secure</span>
+            <span class="tag tag-keyword tag-keyword-success">Success</span>
+            <span class="tag tag-keyword tag-keyword-accent">Accent</span>
+            <span class="tag tag-keyword tag-keyword-guide">Guide</span>
+            <span class="tag tag-keyword tag-keyword-alert">Alert</span>
+            <span class="tag tag-keyword tag-keyword-warn">Warn</span>
+            <span class="tag tag-keyword tag-keyword-caution">Caution</span>
+          </div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;!-- Status tags (filled) --&gt;
+&lt;span class="tag tag-neutral"&gt;Neutral&lt;/span&gt;
+&lt;span class="tag tag-inactive"&gt;Inactive&lt;/span&gt;
+&lt;span class="tag tag-secure"&gt;Secure&lt;/span&gt;
+&lt;span class="tag tag-success"&gt;Success&lt;/span&gt;
+&lt;span class="tag tag-accent"&gt;Accent&lt;/span&gt;
+&lt;span class="tag tag-guide"&gt;Guide&lt;/span&gt;
+&lt;span class="tag tag-alert"&gt;Alert&lt;/span&gt;
+&lt;span class="tag tag-warn"&gt;Warn&lt;/span&gt;
+&lt;span class="tag tag-caution"&gt;Caution&lt;/span&gt;
+
+&lt;!-- Keyword tags (colored text) --&gt;
+&lt;span class="tag tag-keyword"&gt;Default&lt;/span&gt;
+&lt;span class="tag tag-keyword tag-keyword-inactive"&gt;Inactive&lt;/span&gt;
+&lt;span class="tag tag-keyword tag-keyword-secure"&gt;Secure&lt;/span&gt;
+&lt;span class="tag tag-keyword tag-keyword-success"&gt;Success&lt;/span&gt;
+&lt;span class="tag tag-keyword tag-keyword-accent"&gt;Accent&lt;/span&gt;
+&lt;span class="tag tag-keyword tag-keyword-guide"&gt;Guide&lt;/span&gt;
+&lt;span class="tag tag-keyword tag-keyword-alert"&gt;Alert&lt;/span&gt;
+&lt;span class="tag tag-keyword tag-keyword-warn"&gt;Warn&lt;/span&gt;
+&lt;span class="tag tag-keyword tag-keyword-caution"&gt;Caution&lt;/span&gt;</code></pre>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ============================================================
@@ -1108,7 +1234,7 @@ html { scroll-behavior: smooth; }
      ============================================================ -->
 <section id="badges" class="ds-section">
   <h2 class="ds-section-title">Badges</h2>
-  <p class="ds-section-desc">Dot indicators and numbered badges for status and count display.</p>
+  <p class="ds-section-desc">Dot indicators and numbered badges for status and count display. 9 semantic colors plus skeleton state.</p>
 
   <div class="ds-subsection">
     <p class="ds-label">Badge Dots</p>
@@ -1118,24 +1244,30 @@ html { scroll-behavior: smooth; }
         <button data-tab="code" onclick="switchTab(this,'block-badges-dots')">Code</button>
       </div>
       <div class="ds-preview">
-        <div class="ds-preview-row">
+        <div class="ds-preview-row" style="align-items:center">
           <span class="badge-dot badge-dot-neutral"></span>
-          <span class="badge-dot badge-dot-not-active"></span>
+          <span class="badge-dot badge-dot-inactive"></span>
+          <span class="badge-dot badge-dot-secure"></span>
           <span class="badge-dot badge-dot-success"></span>
           <span class="badge-dot badge-dot-accent"></span>
           <span class="badge-dot badge-dot-guide"></span>
           <span class="badge-dot badge-dot-alert"></span>
           <span class="badge-dot badge-dot-warn"></span>
           <span class="badge-dot badge-dot-caution"></span>
-          <span class="badge-dot badge-dot-secure"></span>
+          <span class="badge-dot badge-dot-skeleton"></span>
+        </div>
+        <div class="ds-preview-row" style="gap:12px; font-size:12px; color:var(--text-muted-accessible)">
+          <span>neutral</span><span>inactive</span><span>secure</span><span>success</span><span>accent</span><span>guide</span><span>alert</span><span>warn</span><span>caution</span><span>skeleton</span>
         </div>
       </div>
       <div class="ds-code" style="display:none">
         <button class="ds-copy" onclick="copyCode(this)">Copy</button>
         <pre><code class="language-html">&lt;span class="badge-dot badge-dot-neutral"&gt;&lt;/span&gt;
+&lt;span class="badge-dot badge-dot-inactive"&gt;&lt;/span&gt;
 &lt;span class="badge-dot badge-dot-success"&gt;&lt;/span&gt;
 &lt;span class="badge-dot badge-dot-accent"&gt;&lt;/span&gt;
-&lt;span class="badge-dot badge-dot-alert"&gt;&lt;/span&gt;</code></pre>
+&lt;!-- Skeleton --&gt;
+&lt;span class="badge-dot badge-dot-skeleton"&gt;&lt;/span&gt;</code></pre>
       </div>
     </div>
   </div>
@@ -1148,23 +1280,29 @@ html { scroll-behavior: smooth; }
         <button data-tab="code" onclick="switchTab(this,'block-badges-numbers')">Code</button>
       </div>
       <div class="ds-preview">
-        <div class="ds-preview-row">
+        <div class="ds-preview-row" style="align-items:center">
           <span class="badge-number badge-number-neutral">5</span>
-          <span class="badge-number badge-number-not-active">0</span>
+          <span class="badge-number badge-number-inactive">0</span>
+          <span class="badge-number badge-number-secure">1</span>
           <span class="badge-number badge-number-success">12</span>
           <span class="badge-number badge-number-accent">3</span>
           <span class="badge-number badge-number-guide">7</span>
           <span class="badge-number badge-number-alert">99</span>
           <span class="badge-number badge-number-warn">4</span>
           <span class="badge-number badge-number-caution">8</span>
-          <span class="badge-number badge-number-secure">1</span>
+          <span class="badge-number badge-number-skeleton"></span>
+        </div>
+        <div class="ds-preview-row" style="gap:12px; font-size:12px; color:var(--text-muted-accessible)">
+          <span>neutral</span><span>inactive</span><span>secure</span><span>success</span><span>accent</span><span>guide</span><span>alert</span><span>warn</span><span>caution</span><span>skeleton</span>
         </div>
       </div>
       <div class="ds-code" style="display:none">
         <button class="ds-copy" onclick="copyCode(this)">Copy</button>
         <pre><code class="language-html">&lt;span class="badge-number badge-number-accent"&gt;12&lt;/span&gt;
 &lt;span class="badge-number badge-number-alert"&gt;99&lt;/span&gt;
-&lt;span class="badge-number badge-number-success"&gt;3&lt;/span&gt;</code></pre>
+&lt;span class="badge-number badge-number-inactive"&gt;0&lt;/span&gt;
+&lt;!-- Skeleton --&gt;
+&lt;span class="badge-number badge-number-skeleton"&gt;&lt;/span&gt;</code></pre>
       </div>
     </div>
   </div>
@@ -1178,53 +1316,189 @@ html { scroll-behavior: smooth; }
   <p class="ds-section-desc">Interactive filter and selection chips with optional remove button.</p>
 
   <div class="ds-subsection">
-    <p class="ds-label">All Variants</p>
+    <p class="ds-label">Default (non-selected)</p>
     <div class="ds-component-block" id="block-chips-variants">
       <div class="ds-tabs-bar">
         <button class="active" data-tab="preview" onclick="switchTab(this,'block-chips-variants')">Preview</button>
         <button data-tab="code" onclick="switchTab(this,'block-chips-variants')">Code</button>
       </div>
       <div class="ds-preview">
-        <div class="ds-preview-row">
-          <span class="chip chip-default">Default</span>
-          <span class="chip chip-neutral">Neutral</span>
-          <span class="chip chip-accent">Accent</span>
-          <span class="chip chip-success">Success</span>
-          <span class="chip chip-alert">Alert</span>
-          <span class="chip chip-warn">Warn</span>
-          <span class="chip chip-caution">Caution</span>
-          <span class="chip chip-guide">Guide</span>
+        <div class="ds-preview-row" style="gap:20px">
+          <div style="display:flex; flex-direction:column; gap:8px">
+            <span style="font-size:12px; color:var(--text-muted-accessible)">Default</span>
+            <span class="chip chip-default">Label</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px">
+            <span style="font-size:12px; color:var(--text-muted-accessible)">Disabled</span>
+            <span class="chip chip-disabled">Label</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px">
+            <span style="font-size:12px; color:var(--text-muted-accessible)">Inactive</span>
+            <span class="chip chip-inactive">Label</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px">
+            <span style="font-size:12px; color:var(--text-muted-accessible)">Positive Tone</span>
+            <div style="display:flex; gap:12px">
+              <span class="chip chip-accent">Label</span>
+              <span class="chip chip-success">Label</span>
+              <span class="chip chip-secure">Label</span>
+              <span class="chip chip-guide">Label</span>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px">
+            <span style="font-size:12px; color:var(--text-muted-accessible)">Negative Tone</span>
+            <div style="display:flex; gap:12px">
+              <span class="chip chip-alert">Label</span>
+              <span class="chip chip-warn">Label</span>
+              <span class="chip chip-caution">Label</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="ds-code" style="display:none">
         <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-        <pre><code class="language-html">&lt;span class="chip chip-default"&gt;Default&lt;/span&gt;
-&lt;span class="chip chip-accent"&gt;Accent&lt;/span&gt;
-&lt;span class="chip chip-success"&gt;Success&lt;/span&gt;</code></pre>
+        <pre><code class="language-html">&lt;span class="chip chip-default"&gt;Label&lt;/span&gt;
+&lt;span class="chip chip-disabled"&gt;Label&lt;/span&gt;
+&lt;span class="chip chip-accent"&gt;Label&lt;/span&gt;
+&lt;span class="chip chip-success"&gt;Label&lt;/span&gt;
+&lt;span class="chip chip-alert"&gt;Label&lt;/span&gt;</code></pre>
       </div>
     </div>
   </div>
 
   <div class="ds-subsection">
-    <p class="ds-label">Selected with Remove</p>
+    <p class="ds-label">Selected (removable)</p>
     <div class="ds-component-block" id="block-chips-selected">
       <div class="ds-tabs-bar">
         <button class="active" data-tab="preview" onclick="switchTab(this,'block-chips-selected')">Preview</button>
         <button data-tab="code" onclick="switchTab(this,'block-chips-selected')">Code</button>
       </div>
       <div class="ds-preview">
-        <div class="ds-preview-row">
-          <span class="chip chip-accent chip-selected">Selected<button class="chip-remove"><svg viewBox="0 0 10 10"><path d="M8.5 1.5L1.5 8.5M1.5 1.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></span>
+        <div class="ds-preview-row" style="gap:12px">
+          <span class="chip chip-default chip-selected">Label<button class="chip-remove"><svg viewBox="0 0 10 10"><path d="M8.5 1.5L1.5 8.5M1.5 1.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></span>
+          <span class="chip chip-accent chip-selected">Label<button class="chip-remove"><svg viewBox="0 0 10 10"><path d="M8.5 1.5L1.5 8.5M1.5 1.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></span>
+          <span class="chip chip-success chip-selected">Label<button class="chip-remove"><svg viewBox="0 0 10 10"><path d="M8.5 1.5L1.5 8.5M1.5 1.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></span>
+          <span class="chip chip-secure chip-selected">Label<button class="chip-remove"><svg viewBox="0 0 10 10"><path d="M8.5 1.5L1.5 8.5M1.5 1.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></span>
+          <span class="chip chip-guide chip-selected">Label<button class="chip-remove"><svg viewBox="0 0 10 10"><path d="M8.5 1.5L1.5 8.5M1.5 1.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></span>
+          <span class="chip chip-alert chip-selected">Label<button class="chip-remove"><svg viewBox="0 0 10 10"><path d="M8.5 1.5L1.5 8.5M1.5 1.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></span>
+          <span class="chip chip-warn chip-selected">Label<button class="chip-remove"><svg viewBox="0 0 10 10"><path d="M8.5 1.5L1.5 8.5M1.5 1.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></span>
+          <span class="chip chip-caution chip-selected">Label<button class="chip-remove"><svg viewBox="0 0 10 10"><path d="M8.5 1.5L1.5 8.5M1.5 1.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></button></span>
         </div>
       </div>
       <div class="ds-code" style="display:none">
         <button class="ds-copy" onclick="copyCode(this)">Copy</button>
         <pre><code class="language-html">&lt;span class="chip chip-accent chip-selected"&gt;
-  Selected
+  Label
   &lt;button class="chip-remove"&gt;
     &lt;svg viewBox="0 0 10 10"&gt;&lt;path d="M8.5 1.5L1.5 8.5M1.5 1.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/&gt;&lt;/svg&gt;
   &lt;/button&gt;
 &lt;/span&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <p class="ds-label">Interior Variants</p>
+    <div class="ds-component-block" id="block-chips-interiors">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-chips-interiors')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-chips-interiors')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="ds-preview-row" style="gap:20px">
+          <div style="display:flex; flex-direction:column; gap:8px">
+            <span style="font-size:12px; color:var(--text-muted-accessible)">Text only</span>
+            <span class="chip-interior">Label</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px">
+            <span style="font-size:12px; color:var(--text-muted-accessible)">Icon + text</span>
+            <span class="chip-interior"><svg class="chip-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="4" fill="var(--green-700)"/></svg>Label</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px">
+            <span style="font-size:12px; color:var(--text-muted-accessible)">Avatar + text</span>
+            <span class="chip-interior"><span class="chip-avatar chip-avatar-accent">J</span>Label</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px">
+            <span style="font-size:12px; color:var(--text-muted-accessible)">Flag + text</span>
+            <span class="chip-interior"><span class="fi fi-us chip-flag"></span>Label</span>
+          </div>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;!-- Text only --&gt;
+&lt;span class="chip-interior"&gt;Label&lt;/span&gt;
+&lt;!-- Icon + text --&gt;
+&lt;span class="chip-interior"&gt;
+  &lt;svg class="chip-icon" ...&gt;...&lt;/svg&gt;
+  Label
+&lt;/span&gt;
+&lt;!-- Avatar (letter) + text --&gt;
+&lt;span class="chip-interior"&gt;
+  &lt;span class="chip-avatar chip-avatar-accent"&gt;J&lt;/span&gt;
+  Label
+&lt;/span&gt;
+&lt;!-- Flag + text --&gt;
+&lt;span class="chip-interior"&gt;
+  &lt;img class="chip-flag" src="..." alt="..." /&gt;
+  Label
+&lt;/span&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <p class="ds-label">Skeleton</p>
+    <div class="ds-component-block" id="block-chips-skeleton">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-chips-skeleton')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-chips-skeleton')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="ds-preview-row">
+          <span class="chip chip-skeleton"></span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;span class="chip chip-skeleton"&gt;&lt;/span&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SCAN STATUS
+     ============================================================ -->
+<section id="scan-status" class="ds-section">
+  <h2 class="ds-section-title">Scan Status</h2>
+  <p class="ds-section-desc">Colored status indicators for scan results.</p>
+
+  <div class="ds-subsection">
+    <p class="ds-label">All Variants</p>
+    <div class="ds-component-block" id="block-scan-status-variants">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-scan-status-variants')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-scan-status-variants')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="ds-preview-row" style="gap:12px; flex-wrap:wrap">
+          <span class="scan-status scan-status-allowed">Allowed</span>
+          <span class="scan-status scan-status-blocked">Blocked</span>
+          <span class="scan-status scan-status-complete">Complete</span>
+          <span class="scan-status scan-status-failed">Failed</span>
+          <span class="scan-status scan-status-skipped">Skipped</span>
+          <span class="scan-status scan-status-pending">Pending</span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;span class="scan-status scan-status-allowed"&gt;Allowed&lt;/span&gt;
+&lt;span class="scan-status scan-status-blocked"&gt;Blocked&lt;/span&gt;
+&lt;span class="scan-status scan-status-complete"&gt;Complete&lt;/span&gt;
+&lt;span class="scan-status scan-status-failed"&gt;Failed&lt;/span&gt;
+&lt;span class="scan-status scan-status-skipped"&gt;Skipped&lt;/span&gt;
+&lt;span class="scan-status scan-status-pending"&gt;Pending&lt;/span&gt;</code></pre>
       </div>
     </div>
   </div>
@@ -1235,39 +1509,106 @@ html { scroll-behavior: smooth; }
      ============================================================ -->
 <section id="verdicts" class="ds-section">
   <h2 class="ds-section-title">Verdicts</h2>
-  <p class="ds-section-desc">Scan result indicators with colored dot and text label.</p>
+  <p class="ds-section-desc">Scan result indicators with colored dot and text label. Muted variants use gray dots for inactive/informational states; active variants use colored dots with strong text.</p>
 
   <div class="ds-subsection">
-    <p class="ds-label">All Variants</p>
-    <div class="ds-component-block" id="block-verdicts-variants">
+    <p class="ds-label">Scan Verdicts</p>
+    <div class="ds-component-block" id="block-verdicts-scan">
       <div class="ds-tabs-bar">
-        <button class="active" data-tab="preview" onclick="switchTab(this,'block-verdicts-variants')">Preview</button>
-        <button data-tab="code" onclick="switchTab(this,'block-verdicts-variants')">Code</button>
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-verdicts-scan')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-verdicts-scan')">Code</button>
       </div>
       <div class="ds-preview">
-        <div class="ds-preview-row" style="gap:16px;">
-          <span class="verdict verdict-neutral"><span class="verdict-dot"></span><span class="verdict-text">Neutral</span></span>
-          <span class="verdict verdict-not-active"><span class="verdict-dot"></span><span class="verdict-text">Not Active</span></span>
-          <span class="verdict verdict-detected"><span class="verdict-dot"></span><span class="verdict-text">Detected</span></span>
-          <span class="verdict verdict-progress"><span class="verdict-dot"></span><span class="verdict-text">In Progress</span></span>
-          <span class="verdict verdict-completed"><span class="verdict-dot"></span><span class="verdict-text">Completed</span></span>
-          <span class="verdict verdict-failed"><span class="verdict-dot"></span><span class="verdict-text">Failed</span></span>
-          <span class="verdict verdict-secure"><span class="verdict-dot"></span><span class="verdict-text">Secure</span></span>
-          <span class="verdict verdict-warn"><span class="verdict-dot"></span><span class="verdict-text">Warning</span></span>
-          <span class="verdict verdict-accent"><span class="verdict-dot"></span><span class="verdict-text">Accent</span></span>
-          <span class="verdict verdict-guide"><span class="verdict-dot"></span><span class="verdict-text">Guide</span></span>
-          <span class="verdict verdict-caution"><span class="verdict-dot"></span><span class="verdict-text">Caution</span></span>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <span style="font-size:12px; color:var(--text-muted-accessible)">Muted</span>
+          <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:center;">
+            <span class="verdict verdict-not-detected"><span class="verdict-dot"></span><span class="verdict-text">Not Detected</span></span>
+            <span class="verdict verdict-not-supported"><span class="verdict-dot"></span><span class="verdict-text">Not Supported</span></span>
+            <span class="verdict verdict-excluded"><span class="verdict-dot"></span><span class="verdict-text">Excluded</span></span>
+            <span class="verdict verdict-not-active"><span class="verdict-dot"></span><span class="verdict-text">Not Active</span></span>
+          </div>
+
+          <span style="font-size:12px; color:var(--text-muted-accessible)">Active</span>
+          <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:center;">
+            <span class="verdict verdict-detected"><span class="verdict-dot"></span><span class="verdict-text">Detected</span></span>
+            <span class="verdict verdict-detected-metascan"><span class="verdict-dot"></span><span class="verdict-text">5/16 Detected</span></span>
+            <span class="verdict verdict-progress"><span class="verdict-dot"></span><span class="verdict-text">In Progress</span></span>
+            <span class="verdict verdict-completed"><span class="verdict-dot"></span><span class="verdict-text">Completed</span></span>
+            <span class="verdict verdict-failed"><span class="verdict-dot"></span><span class="verdict-text">Failed</span></span>
+          </div>
+
+          <span style="font-size:12px; color:var(--text-muted-accessible)">Origin (flag + text)</span>
+          <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:center;">
+            <span class="verdict verdict-origin-blocked"><span class="fi fi-us verdict-flag"></span><span class="verdict-text">Blocked</span></span>
+            <span class="verdict verdict-origin-allowed"><span class="fi fi-us verdict-flag"></span><span class="verdict-text">Allowed</span></span>
+          </div>
         </div>
       </div>
       <div class="ds-code" style="display:none">
         <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-        <pre><code class="language-html">&lt;span class="verdict verdict-secure"&gt;
+        <pre><code class="language-html">&lt;!-- Muted verdict --&gt;
+&lt;span class="verdict verdict-not-detected"&gt;
   &lt;span class="verdict-dot"&gt;&lt;/span&gt;
-  &lt;span class="verdict-text"&gt;Secure&lt;/span&gt;
+  &lt;span class="verdict-text"&gt;Not Detected&lt;/span&gt;
 &lt;/span&gt;
+
+&lt;!-- Active verdict --&gt;
 &lt;span class="verdict verdict-detected"&gt;
   &lt;span class="verdict-dot"&gt;&lt;/span&gt;
   &lt;span class="verdict-text"&gt;Detected&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;!-- Metascan (x/y format) --&gt;
+&lt;span class="verdict verdict-detected-metascan"&gt;
+  &lt;span class="verdict-dot"&gt;&lt;/span&gt;
+  &lt;span class="verdict-text"&gt;5/16 Detected&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;!-- Origin verdict (flag + text) --&gt;
+&lt;span class="verdict verdict-origin-blocked"&gt;
+  &lt;span class="fi fi-us verdict-flag"&gt;&lt;/span&gt;
+  &lt;span class="verdict-text"&gt;Blocked&lt;/span&gt;
+&lt;/span&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <p class="ds-label">Generic Variants</p>
+    <div class="ds-component-block" id="block-verdicts-generic">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-verdicts-generic')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-verdicts-generic')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:center;">
+          <span class="verdict verdict-neutral"><span class="verdict-dot"></span><span class="verdict-text">Neutral</span></span>
+          <span class="verdict verdict-not-active"><span class="verdict-dot"></span><span class="verdict-text">Not Active</span></span>
+          <span class="verdict verdict-secure"><span class="verdict-dot"></span><span class="verdict-text">Secure</span></span>
+          <span class="verdict verdict-success"><span class="verdict-dot"></span><span class="verdict-text">Success</span></span>
+          <span class="verdict verdict-accent"><span class="verdict-dot"></span><span class="verdict-text">Accent</span></span>
+          <span class="verdict verdict-guide"><span class="verdict-dot"></span><span class="verdict-text">Guide</span></span>
+          <span class="verdict verdict-alert"><span class="verdict-dot"></span><span class="verdict-text">Alert</span></span>
+          <span class="verdict verdict-warn"><span class="verdict-dot"></span><span class="verdict-text">Warning</span></span>
+          <span class="verdict verdict-caution"><span class="verdict-dot"></span><span class="verdict-text">Caution</span></span>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:center; margin-top:12px;">
+          <span class="verdict verdict-flag-neutral"><span class="verdict-flag fi fi-us"></span><span class="verdict-text">Flag Neutral</span></span>
+          <span class="verdict"><span class="verdict-flag fi fi-us"></span><span class="verdict-text">Flag Default</span></span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;!-- Dot variant --&gt;
+&lt;span class="verdict verdict-secure"&gt;
+  &lt;span class="verdict-dot"&gt;&lt;/span&gt;
+  &lt;span class="verdict-text"&gt;Secure&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;!-- Flag variant (muted) --&gt;
+&lt;span class="verdict verdict-flag-neutral"&gt;
+  &lt;span class="verdict-flag fi fi-us"&gt;&lt;/span&gt;
+  &lt;span class="verdict-text"&gt;Flag Neutral&lt;/span&gt;
 &lt;/span&gt;</code></pre>
       </div>
     </div>
@@ -1279,10 +1620,10 @@ html { scroll-behavior: smooth; }
      ============================================================ -->
 <section id="severities" class="ds-section">
   <h2 class="ds-section-title">Severities</h2>
-  <p class="ds-section-desc">Threat severity indicators with triangle icon and color-coded label.</p>
+  <p class="ds-section-desc">Severity indicators using multi-colored signal-level icons.</p>
 
   <div class="ds-subsection">
-    <p class="ds-label">All Levels</p>
+    <p class="ds-label">Severity Levels</p>
     <div class="ds-component-block" id="block-severities-levels">
       <div class="ds-tabs-bar">
         <button class="active" data-tab="preview" onclick="switchTab(this,'block-severities-levels')">Preview</button>
@@ -1290,19 +1631,73 @@ html { scroll-behavior: smooth; }
       </div>
       <div class="ds-preview">
         <div class="ds-preview-row" style="gap:16px;">
-          <span class="severity severity-critical"><span class="severity-icon"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></span>Critical</span>
-          <span class="severity severity-high"><span class="severity-icon"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></span>High</span>
-          <span class="severity severity-medium"><span class="severity-icon"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></span>Medium</span>
-          <span class="severity severity-low"><span class="severity-icon"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></span>Low</span>
-          <span class="severity severity-none"><span class="severity-icon"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/></svg></span>None</span>
+          <span class="severity"><span class="icon-signal-4"></span>Critical</span>
+          <span class="severity"><span class="icon-signal-3"></span>High</span>
+          <span class="severity"><span class="icon-signal-2"></span>Medium</span>
+          <span class="severity"><span class="icon-signal-1"></span>Low</span>
+          <span class="severity"><span class="icon-signal-0"></span>None</span>
         </div>
       </div>
       <div class="ds-code" style="display:none">
         <button class="ds-copy" onclick="copyCode(this)">Copy</button>
-        <pre><code class="language-html">&lt;span class="severity severity-critical"&gt;
-  &lt;span class="severity-icon"&gt;&lt;svg viewBox="0 0 16 16" fill="currentColor"&gt;&lt;path d="M8.58 1.39a.67.67 0 00-1.16 0l-6.5 11.24A.67.67 0 001.5 13.67h13a.67.67 0 00.58-1.04L8.58 1.39z"/&gt;&lt;/svg&gt;&lt;/span&gt;
+        <pre><code class="language-html">&lt;span class="severity"&gt;
+  &lt;span class="icon-signal-4"&gt;&lt;/span&gt;
   Critical
 &lt;/span&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <p class="ds-label">Scan Severities — Threat Risk</p>
+    <div class="ds-component-block" id="block-scan-severity-threat">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-scan-severity-threat')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-scan-severity-threat')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="ds-preview-row" style="gap:16px;">
+          <span class="severity"><span class="icon-signal-4"></span>Malicious</span>
+          <span class="severity"><span class="icon-signal-3"></span>Likely Malicious</span>
+          <span class="severity"><span class="icon-signal-2"></span>Suspicious</span>
+          <span class="severity"><span class="icon-signal-1"></span>Benign</span>
+          <span class="severity"><span class="icon-signal-0"></span>No Threat</span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;span class="severity"&gt;&lt;span class="icon-signal-4"&gt;&lt;/span&gt;Malicious&lt;/span&gt;
+&lt;span class="severity"&gt;&lt;span class="icon-signal-3"&gt;&lt;/span&gt;Likely Malicious&lt;/span&gt;
+&lt;span class="severity"&gt;&lt;span class="icon-signal-2"&gt;&lt;/span&gt;Suspicious&lt;/span&gt;
+&lt;span class="severity"&gt;&lt;span class="icon-signal-1"&gt;&lt;/span&gt;Benign&lt;/span&gt;
+&lt;span class="severity"&gt;&lt;span class="icon-signal-0"&gt;&lt;/span&gt;No Threat&lt;/span&gt;</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <p class="ds-label">Scan Severities — Risk Level</p>
+    <div class="ds-component-block" id="block-scan-severity-risk">
+      <div class="ds-tabs-bar">
+        <button class="active" data-tab="preview" onclick="switchTab(this,'block-scan-severity-risk')">Preview</button>
+        <button data-tab="code" onclick="switchTab(this,'block-scan-severity-risk')">Code</button>
+      </div>
+      <div class="ds-preview">
+        <div class="ds-preview-row" style="gap:16px;">
+          <span class="severity"><span class="icon-signal-4"></span>High Risk</span>
+          <span class="severity"><span class="icon-signal-3"></span>Medium Risk</span>
+          <span class="severity"><span class="icon-signal-2"></span>Low Risk</span>
+          <span class="severity"><span class="icon-signal-1"></span>No Risk</span>
+          <span class="severity"><span class="icon-signal-0"></span>No Risk Score</span>
+        </div>
+      </div>
+      <div class="ds-code" style="display:none">
+        <button class="ds-copy" onclick="copyCode(this)">Copy</button>
+        <pre><code class="language-html">&lt;span class="severity"&gt;&lt;span class="icon-signal-4"&gt;&lt;/span&gt;High Risk&lt;/span&gt;
+&lt;span class="severity"&gt;&lt;span class="icon-signal-3"&gt;&lt;/span&gt;Medium Risk&lt;/span&gt;
+&lt;span class="severity"&gt;&lt;span class="icon-signal-2"&gt;&lt;/span&gt;Low Risk&lt;/span&gt;
+&lt;span class="severity"&gt;&lt;span class="icon-signal-1"&gt;&lt;/span&gt;No Risk&lt;/span&gt;
+&lt;span class="severity"&gt;&lt;span class="icon-signal-0"&gt;&lt;/span&gt;No Risk Score&lt;/span&gt;</code></pre>
       </div>
     </div>
   </div>

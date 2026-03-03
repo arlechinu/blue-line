@@ -136,3 +136,34 @@
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M10.5 14C11.3284 14 12 13.3284 12 12.5C12 11.6716 11.3284 11 10.5 11C9.67157 11 9 11.6716 9 12.5C9 13.3284 9.67157 14 10.5 14Z' fill='black'/%3E%3Cpath d='M10.5 5C11.3284 5 12 4.32843 12 3.5C12 2.67157 11.3284 2 10.5 2C9.67157 2 9 2.67157 9 3.5C9 4.32843 9.67157 5 10.5 5Z' fill='black'/%3E%3Cpath d='M10.5 9.5C11.3284 9.5 12 8.82843 12 8C12 7.17157 11.3284 6.5 10.5 6.5C9.67157 6.5 9 7.17157 9 8C9 8.82843 9.67157 9.5 10.5 9.5Z' fill='black'/%3E%3Cpath d='M5.5 14C6.32843 14 7 13.3284 7 12.5C7 11.6716 6.32843 11 5.5 11C4.67157 11 4 11.6716 4 12.5C4 13.3284 4.67157 14 5.5 14Z' fill='black'/%3E%3Cpath d='M5.5 5C6.32843 5 7 4.32843 7 3.5C7 2.67157 6.32843 2 5.5 2C4.67157 2 4 2.67157 4 3.5C4 4.32843 4.67157 5 5.5 5Z' fill='black'/%3E%3Cpath d='M5.5 9.5C6.32843 9.5 7 8.82843 7 8C7 7.17157 6.32843 6.5 5.5 6.5C4.67157 6.5 4 7.17157 4 8C4 8.82843 4.67157 9.5 5.5 9.5Z' fill='black'/%3E%3C/svg%3E");
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M10.5 14C11.3284 14 12 13.3284 12 12.5C12 11.6716 11.3284 11 10.5 11C9.67157 11 9 11.6716 9 12.5C9 13.3284 9.67157 14 10.5 14Z' fill='black'/%3E%3Cpath d='M10.5 5C11.3284 5 12 4.32843 12 3.5C12 2.67157 11.3284 2 10.5 2C9.67157 2 9 2.67157 9 3.5C9 4.32843 9.67157 5 10.5 5Z' fill='black'/%3E%3Cpath d='M10.5 9.5C11.3284 9.5 12 8.82843 12 8C12 7.17157 11.3284 6.5 10.5 6.5C9.67157 6.5 9 7.17157 9 8C9 8.82843 9.67157 9.5 10.5 9.5Z' fill='black'/%3E%3Cpath d='M5.5 14C6.32843 14 7 13.3284 7 12.5C7 11.6716 6.32843 11 5.5 11C4.67157 11 4 11.6716 4 12.5C4 13.3284 4.67157 14 5.5 14Z' fill='black'/%3E%3Cpath d='M5.5 5C6.32843 5 7 4.32843 7 3.5C7 2.67157 6.32843 2 5.5 2C4.67157 2 4 2.67157 4 3.5C4 4.32843 4.67157 5 5.5 5Z' fill='black'/%3E%3Cpath d='M5.5 9.5C6.32843 9.5 7 8.82843 7 8C7 7.17157 6.32843 6.5 5.5 6.5C4.67157 6.5 4 7.17157 4 8C4 8.82843 4.67157 9.5 5.5 9.5Z' fill='black'/%3E%3C/svg%3E");
 }
+
+/* ================================================================
+   Signal Level Icons (multi-color, not maskable)
+   Used by severity and scan-severity components.
+   5 levels: signal-0 (none) through signal-4 (critical).
+   ================================================================ */
+.icon-signal-0, .icon-signal-1, .icon-signal-2, .icon-signal-3, .icon-signal-4 {
+  display: inline-flex; width: 16px; height: 16px; flex-shrink: 0;
+  background-size: 16px 16px; background-repeat: no-repeat; background-position: center;
+  background-color: transparent;
+}
+/* signal-0: gray slashed triangle (none / no threat / no risk score) */
+.icon-signal-0 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M9.12 6.94L10.18 8L12.56 5.62V10.38L14.06 11.88V2L9.12 6.94Z' fill='%23A9B2C4'/%3E%3Cpath d='M2.06 2L1 3.06L7 9.06L2.06 14H11.94L13 15.06L14.06 14L2.06 2ZM5.68 12.5L8.06 10.12L10.44 12.5H5.68Z' fill='%23A9B2C4'/%3E%3C/svg%3E");
+}
+/* signal-1: gray partial triangle (low / benign / no risk) */
+.icon-signal-1 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M2 14H14V2L2 14ZM12.5 12.5H8V10.12L12.5 5.62V12.5Z' fill='%23607497'/%3E%3C/svg%3E");
+}
+/* signal-2: yellow half triangle (medium / suspicious / low risk) */
+.icon-signal-2 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M2 14H14V2L2 14ZM12.5 12.5H10V8.12L12.5 5.62V12.5Z' fill='%23DBB600'/%3E%3C/svg%3E");
+}
+/* signal-3: orange ¾ triangle (high / likely malicious / medium risk) */
+.icon-signal-3 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M2 14H14V2L2 14ZM12.5 12.5H11V7.12L12.5 5.62V12.5Z' fill='%23FF6B00'/%3E%3C/svg%3E");
+}
+/* signal-4: red full triangle (critical / malicious / high risk) */
+.icon-signal-4 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M2 14H14V2L2 14Z' fill='%23FF003D'/%3E%3C/svg%3E");
+}
