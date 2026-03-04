@@ -2143,8 +2143,10 @@ html { scroll-behavior: smooth; }
   <h2 class="ds-section-title">Pagination</h2>
   <p class="ds-section-desc">Table footer pagination with page size selector and page navigation.</p>
 
+  <div class="ds-guideline">Tables with <strong>&le;10 items</strong> should not show a pagination footer &mdash; add <code style="font-family:'SF Mono',Consolas,monospace; font-size:12.5px; background:var(--blue-100); color:var(--blue-900); padding:1px 6px; border-radius:3px;">.no-footer</code> to the <code style="font-family:'SF Mono',Consolas,monospace; font-size:12.5px; background:var(--blue-100); color:var(--blue-900); padding:1px 6px; border-radius:3px;">.audit-card</code>. Single-table pages (<code style="font-family:'SF Mono',Consolas,monospace; font-size:12.5px; background:var(--blue-100); color:var(--blue-900); padding:1px 6px; border-radius:3px;">.table-page</code>) should default to <strong>20 items per page</strong> with the card filling the viewport vertically.</div>
+
   <div class="ds-subsection">
-    <p class="ds-label">Default</p>
+    <p class="ds-label">Default (20 items per page)</p>
     <div class="ds-component-block" id="block-pagination-default">
       <div class="ds-tabs-bar">
         <button class="active" data-tab="preview" onclick="switchTab(this,'block-pagination-default')">Preview</button>
@@ -2153,7 +2155,7 @@ html { scroll-behavior: smooth; }
       <div class="ds-preview">
         <div class="audit-pagination">
           <div class="audit-pagination-left">
-            <select style="height:28px; font-size:13px;"><option>10</option><option>25</option><option>50</option></select>
+            <select style="height:28px; font-size:13px;"><option>20</option><option>50</option><option>100</option></select>
             <span style="font-size:13px; color:var(--text-muted);">items per page</span>
           </div>
           <div class="audit-pagination-right">
@@ -2167,7 +2169,7 @@ html { scroll-behavior: smooth; }
         <button class="ds-copy" onclick="copyCode(this)">Copy</button>
         <pre><code class="language-html">&lt;div class="audit-pagination"&gt;
   &lt;div class="audit-pagination-left"&gt;
-    &lt;select&gt;&lt;option&gt;10&lt;/option&gt;&lt;option&gt;25&lt;/option&gt;&lt;/select&gt;
+    &lt;select&gt;&lt;option&gt;20&lt;/option&gt;&lt;option&gt;50&lt;/option&gt;&lt;option&gt;100&lt;/option&gt;&lt;/select&gt;
     &lt;span&gt;items per page&lt;/span&gt;
   &lt;/div&gt;
   &lt;div class="audit-pagination-right"&gt;
@@ -2175,6 +2177,14 @@ html { scroll-behavior: smooth; }
     &lt;select class="audit-page-select"&gt;&lt;option&gt;Page 1&lt;/option&gt;&lt;/select&gt;
     &lt;button class="audit-page-btn"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/button&gt;
   &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Hide footer when ≤10 items: add .no-footer to .audit-card --&gt;
+&lt;div class="audit-card no-footer"&gt;
+  &lt;div class="table-scroll"&gt;
+    &lt;table class="data-table"&gt;...&lt;/table&gt;
+  &lt;/div&gt;
+  &lt;div class="audit-pagination"&gt;...&lt;/div&gt; &lt;!-- hidden by .no-footer --&gt;
 &lt;/div&gt;</code></pre>
       </div>
     </div>

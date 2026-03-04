@@ -1181,6 +1181,12 @@ th:last-child:not(.col-action):not(.col-expand):not(.col-cb):not(:empty) { paddi
 [data-theme="dark"] .audit-pagination { border-color: var(--border-card); color: var(--text-muted); }
 [data-theme="dark"] .audit-page-btn { background: var(--surface-bg); border-color: var(--border-200); color: var(--text-muted); }
 
+/* Hide pagination footer when table has ≤10 items.
+   Products add .no-footer to .audit-card when the result set is ≤10. */
+.no-footer .audit-pagination { display: none; }
+.no-footer .table-scroll,
+.no-footer .audit-table-scroll { border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius); }
+
 /* ========================================================================
    TAGS, BADGES, CHIPS, VERDICTS, SEVERITIES
    ======================================================================== */
@@ -1540,6 +1546,8 @@ th:last-child:not(.col-action):not(.col-expand):not(.col-cb):not(:empty) { paddi
 /* --- Page View Switching --- */
 .page-view { display: none; }
 .page-view.active { display: block; }
+/* Single-table pages: card fills viewport, table scrolls inside, header + footer fixed.
+   Default 20 items per page. If ≤10 items, add .no-footer to .audit-card. */
 .page-view.table-page { display: none; flex-direction: column; height: calc(100vh - 56px - 40px); }
 .page-view.table-page.active { display: flex; }
 .table-page .audit-card { flex: 1; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }

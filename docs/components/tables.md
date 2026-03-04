@@ -157,6 +157,8 @@ When `[data-theme="dark"]` is set:
 - Use `.audit-card-header` with `.card-bulk-actions` when the table supports multi-select
 - Keep cell content concise; rely on `text-overflow: ellipsis` for long values
 - Match card header padding (20px) with first/last column padding
+- Hide the pagination footer when the table has **≤10 items** — add `.no-footer` to `.audit-card`
+- Default to **20 items per page** on single-table pages (`.table-page`)
 
 ### Don't
 
