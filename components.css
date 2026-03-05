@@ -663,13 +663,10 @@ select:focus { border-color: var(--primary); outline: none; }
 }
 .audit-card-title .info-icon:hover { color: var(--text-subtle); }
 
-/* Card header variant: text button action */
-.audit-card-actions .btn-text { font-size: 13px; }
-
 /* Card header variant: anchor / new-tab link */
 .card-header-link {
   display: inline-flex; align-items: center; gap: 4px;
-  font-size: 13px; font-weight: 500; color: var(--text-link);
+  font-size: 14px; font-weight: 500; color: var(--text-link);
   text-decoration: none; cursor: pointer;
 }
 .card-header-link:hover { text-decoration: underline; }
