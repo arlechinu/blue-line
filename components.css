@@ -2755,9 +2755,10 @@ th:last-child:not(.col-action):not(.col-expand):not(.col-cb):not(:empty) { paddi
 .stat-card-trend-text {
   font-size: 14px;
   font-weight: 400;
-  color: var(--text-subtle);
   line-height: 16px;
 }
+.stat-card-trend-up + .stat-card-trend-text { color: var(--ds-success-text); }
+.stat-card-trend-down + .stat-card-trend-text { color: var(--ds-alert-text); }
 .stat-card-legend {
   display: flex;
   flex-direction: column;
