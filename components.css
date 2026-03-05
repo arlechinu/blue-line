@@ -2759,8 +2759,7 @@ th:last-child:not(.col-action):not(.col-expand):not(.col-cb):not(:empty) { paddi
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 14px;
-  line-height: 16px;
+  align-self: stretch;
 }
 .stat-card-legend-dot {
   width: 16px;
@@ -2780,7 +2779,12 @@ th:last-child:not(.col-action):not(.col-expand):not(.col-cb):not(:empty) { paddi
 .stat-card-legend-label {
   flex: 1;
   color: var(--text-strong);
-  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -2788,8 +2792,10 @@ th:last-child:not(.col-action):not(.col-expand):not(.col-cb):not(:empty) { paddi
   color: var(--text-muted);
 }
 .stat-card-legend-val {
-  color: var(--text-strong);
-  font-weight: 500;
+  color: var(--text-subtle);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
   font-variant-numeric: tabular-nums;
 }
 .stat-card-legend-val.inactive {
