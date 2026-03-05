@@ -2762,19 +2762,11 @@ th:last-child:not(.col-action):not(.col-expand):not(.col-cb):not(:empty) { paddi
   align-self: stretch;
 }
 .stat-card-legend-dot {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
+  aspect-ratio: 1 / 1;
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.stat-card-legend-dot::after {
-  content: '';
-  width: 12px;
-  height: 12px;
-  border-radius: var(--radius);
-  background: inherit;
+  border-radius: 4px;
 }
 .stat-card-legend-label {
   flex: 1;
