@@ -364,6 +364,18 @@ Nine semantic families, each with `-100` (bg), `-text` (foreground), `-700` (ico
 | `.row-action-menu-item` / `.danger` | Action menu items |
 | `.row-action-menu--inline` | Absolute-positioned variant |
 
+**Two table types — decision rule:**
+
+| Type | Class | When | Layout | Scroll |
+|---|---|---|---|---|
+| Small table | `.data-table` | ≤5 columns | `auto` — columns size naturally | No horizontal scroll |
+| Big table | `.data-table.table-fixed` | 6+ columns | `fixed` — explicit widths on `<th>` | Horizontal via `.table-scroll` |
+
+**Big table requirements:**
+- Set explicit `min-width` on the `<table>` element to prevent column crushing when the viewport is narrow.
+- Pinned columns (`.col-pinned`, `.col-user-pinned`, `.col-action`) need opaque backgrounds (`--surface-card`) so content doesn't show through when scrolling horizontally.
+- Always include `.col-cb` (sticky left) + `.col-action` (sticky right) as the standard column frame.
+
 **Row states:** `tr.selected` (blue-100 bg), `tr:hover` (surface-hover)
 
 ### 4.7 Checkbox
@@ -669,9 +681,13 @@ These use `background-image` not `mask-image`. Color is baked in.
 - **Font sizes must be rounded** — no decimals. Figma outputs like `15.96px` must be rounded to `16px`.
 
 ### Token Pitfalls
-- `--text-link` equals `--blue-800` (#1854c3) — don't use `--blue-800` for hover states, use `--blue-900` (#123d8b)
-- Dark mode hover for `.btn-text`: use `--blue-400`
-- Dark mode hover for `.btn-menu`: border `--neutral-400`
+
+| Trap | Why | Correct approach |
+|---|---|---|
+| Using `--blue-800` for link hover | `--text-link` already equals `--blue-800` — no contrast change | Use `--blue-900` for link hover |
+| Dark mode `.btn-text` hover | Default link color is `--text-link` → `#6fa3ff` | Hover: use `--blue-400` |
+| Dark mode `.btn-menu` hover border | — | Use `--neutral-400` |
+| Using `--text-muted` for placeholder text | Fails WCAG 4.5:1 contrast | Use `--text-muted-accessible` |
 
 ---
 
@@ -825,6 +841,7 @@ Follows [Semantic Versioning](https://semver.org/):
 | # | Date | Decision | Rationale | Status |
 |---|---|---|---|---|
 | 1 | 2026-03-09 | Full token inventory in claude.md | Eliminates file-read latency; self-contained reference | Active |
+| 2 | 2026-03-09 | Merged teammate's extended CLAUDE.md | Added table decision framework, token pitfalls table, contribution checklist in gap backlog | Active |
 
 ---
 
@@ -849,6 +866,22 @@ _Populated as prototypes are built and patterns validated._
 ## 15. DS GAP BACKLOG
 
 _Components or tokens needed but not yet in Blue Line._
+
+**Component maturity levels** (for assessing existing components and gap priority):
+- **Stable** — in production, API locked, backward-compatible changes only
+- **Beta** — used in ≥1 product, API mostly stable
+- **Alpha** — new, API may change significantly
+
+**When a gap is filed for contribution back to Blue Line, the checklist is:**
+1. Add styles to `components.css` following existing patterns
+2. Include colocated dark mode override (`[data-theme="dark"]`)
+3. Use existing token variables — never hardcode
+4. Add `:focus-visible` states for all interactive elements
+5. Ensure touch targets ≥ 24×24px (WCAG 2.5.8)
+6. Add example to `index.html` docs page
+7. Create/update `docs/components/[name].md`
+8. Update `CHANGELOG.md`
+9. Test both light and dark mode
 
 | # | Gap | Workaround | Priority | Filed |
 |---|---|---|---|---|
